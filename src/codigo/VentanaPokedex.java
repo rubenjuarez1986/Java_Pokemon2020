@@ -115,8 +115,9 @@ public class VentanaPokedex extends javax.swing.JFrame {
         peso = new javax.swing.JLabel();
         altura = new javax.swing.JLabel();
         tipo2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         Altura = new javax.swing.JLabel();
+        Peso = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -148,7 +149,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
                 derActionPerformed(evt);
             }
         });
-        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, -1, -1));
+        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, -1, -1));
 
         nombrePokemon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         nombrePokemon.setForeground(new java.awt.Color(255, 0, 0));
@@ -170,11 +171,16 @@ public class VentanaPokedex extends javax.swing.JFrame {
         tipo2.setForeground(new java.awt.Color(255, 0, 0));
         getContentPane().add(tipo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 235, 40));
 
+        Altura.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Altura.setText("Altura");
+        getContentPane().add(Altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 500, 70, 30));
+
+        Peso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Peso.setText("peso");
+        getContentPane().add(Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 500, 60, 20));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pokedex.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1010, 760));
-
-        Altura.setText("Altura");
-        getContentPane().add(Altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 70, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -262,6 +268,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Altura;
+    private javax.swing.JLabel Peso;
     private javax.swing.JLabel altura;
     private javax.swing.JButton der;
     private javax.swing.JPanel imagenPokemon;
