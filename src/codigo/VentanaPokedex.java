@@ -14,12 +14,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -30,6 +31,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
     BufferedImage buffer1 = null;
     Image imagen1 = null;
     int contador = 0;
+    Clip audio;
 
     Statement estado;
     ResultSet resultadoConsulta;
@@ -135,21 +137,21 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
         getContentPane().add(imagenPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 240, 130));
 
-        izq.setText("<");
+        izq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/izquierda.png"))); // NOI18N
         izq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izqActionPerformed(evt);
             }
         });
-        getContentPane().add(izq, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 550, -1, -1));
+        getContentPane().add(izq, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 40, -1));
 
-        der.setText(">");
+        der.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/derecha.png"))); // NOI18N
         der.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 derActionPerformed(evt);
             }
         });
-        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, -1, -1));
+        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 540, 40, -1));
 
         nombrePokemon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         nombrePokemon.setForeground(new java.awt.Color(255, 0, 0));
@@ -187,8 +189,18 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
     private void izqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izqActionPerformed
         dibujaElPokemonQueEstaEnLaPosicion(contador);
-
-        Pokemon p = listaPokemons.get(String.valueOf(contador + 1));
+Pokemon p = listaPokemons.get(String.valueOf(contador + 1));
+  try {
+            audio = AudioSystem.getClip();
+            audio.open(AudioSystem.getAudioInputStream(getClass().getResource("/sonidos/button5.wav")));
+            audio.start();
+        } catch (LineUnavailableException ex) {
+            
+        } catch (UnsupportedAudioFileException ex) {
+               
+        } catch (IOException ex) {
+         
+        }
         if (p != null) {
             nombrePokemon.setText(p.nombre);
             tipo1.setText(p.tipo1);
@@ -216,6 +228,17 @@ public class VentanaPokedex extends javax.swing.JFrame {
         }
         dibujaElPokemonQueEstaEnLaPosicion(contador);
         Pokemon p = listaPokemons.get(String.valueOf(contador + 1));
+         try {
+            audio = AudioSystem.getClip();
+            audio.open(AudioSystem.getAudioInputStream(getClass().getResource("/sonidos/button5.wav")));
+            audio.start();
+        } catch (LineUnavailableException ex) {
+            
+        } catch (UnsupportedAudioFileException ex) {
+               
+        } catch (IOException ex) {
+         
+        }
         if (p != null) {
             nombrePokemon.setText(p.nombre);
             tipo1.setText(p.tipo1);
