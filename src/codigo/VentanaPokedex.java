@@ -16,9 +16,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -29,6 +31,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
     BufferedImage buffer1 = null;
     Image imagen1 = null;
     int contador = 0;
+    Clip audio;
 
     Statement estado;
     ResultSet resultadoConsulta;
@@ -94,6 +97,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
         peso = new javax.swing.JLabel();
         altura = new javax.swing.JLabel();
         tipo2 = new javax.swing.JLabel();
+        Altura = new javax.swing.JLabel();
+        Peso = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,26 +117,48 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
         getContentPane().add(imagenPokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 240, 130));
 
-        izq.setText("<");
+        izq.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/izquierda.png"))); // NOI18N
         izq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izqActionPerformed(evt);
             }
         });
-        getContentPane().add(izq, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
+        getContentPane().add(izq, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 40, 30));
 
-        der.setText(">");
+        der.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/derecha.png"))); // NOI18N
         der.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 derActionPerformed(evt);
             }
         });
-        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 540, -1, -1));
+        getContentPane().add(der, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 540, 40, 30));
+
+        nombrePokemon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         getContentPane().add(nombrePokemon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 560, 120, 20));
-        getContentPane().add(tipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 246, 40));
+
+        tipo1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tipo1.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(tipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 246, 40));
+
+        peso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        peso.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 100, 30));
+
+        altura.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        altura.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 540, 100, 30));
+
+        tipo2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tipo2.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(tipo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 364, 235, 50));
+
+        Altura.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Altura.setText("Altura");
+        getContentPane().add(Altura, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, 70, 30));
+
+        Peso.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Peso.setText("Peso");
+        getContentPane().add(Peso, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 490, 70, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pokedex.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1010, 760));
@@ -141,6 +168,17 @@ public class VentanaPokedex extends javax.swing.JFrame {
 
     private void izqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izqActionPerformed
         dibujaElPokemonQueEstaEnLaPosicion(contador);
+        try {
+            audio = AudioSystem.getClip();
+            audio.open(AudioSystem.getAudioInputStream(getClass().getResource("/sonidos/button5.wav")));
+            audio.start();
+        } catch (LineUnavailableException ex) {
+
+        } catch (UnsupportedAudioFileException ex) {
+
+        } catch (IOException ex) {
+
+        }
         try {
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             if (resultadoConsulta.last()) {
@@ -167,11 +205,21 @@ public class VentanaPokedex extends javax.swing.JFrame {
     }//GEN-LAST:event_izqActionPerformed
 
     private void derActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_derActionPerformed
-        
-        
-        dibujaElPokemonQueEstaEnLaPosicion(contador);
 
-         try {
+        dibujaElPokemonQueEstaEnLaPosicion(contador);
+        try {
+            audio = AudioSystem.getClip();
+            audio.open(AudioSystem.getAudioInputStream(getClass().getResource("/sonidos/button5.wav")));
+            audio.start();
+        } catch (LineUnavailableException ex) {
+
+        } catch (UnsupportedAudioFileException ex) {
+
+        } catch (IOException ex) {
+
+        }
+
+        try {
             resultadoConsulta = estado.executeQuery("select * from pokemon where id=" + (contador + 1));
             if (resultadoConsulta.last()) {
                 nombrePokemon.setText(resultadoConsulta.getString(2));
@@ -230,6 +278,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Altura;
+    private javax.swing.JLabel Peso;
     private javax.swing.JLabel altura;
     private javax.swing.JButton der;
     private javax.swing.JPanel imagenPokemon;
