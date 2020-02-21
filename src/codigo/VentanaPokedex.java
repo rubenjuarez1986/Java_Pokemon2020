@@ -32,6 +32,7 @@ public class VentanaPokedex extends javax.swing.JFrame {
     Image imagen1 = null;
     int contador = 0;
     Clip audio;
+    Clip sonidoFondo;
 
     Statement estado;
     ResultSet resultadoConsulta;
@@ -52,6 +53,8 @@ public class VentanaPokedex extends javax.swing.JFrame {
      */
     public VentanaPokedex() {
         initComponents();
+        sonidoFondo();
+        sonidoFondo.start();
         try {
             imagen1 = ImageIO.read((getClass().getResource("/imagenes/black-white.png")));
         } catch (IOException ex) {
@@ -98,6 +101,15 @@ public class VentanaPokedex extends javax.swing.JFrame {
         g2.fillRect(0, 0, imagenPokemon.getWidth(), imagenPokemon.getHeight());
         g2.drawImage(imagen1, 0, 0, imagenPokemon.getWidth(), imagenPokemon.getHeight(), columna * 96, fila * 96, columna * 96 + 96, fila * 96 + 96, null);
         repaint();
+    }
+     public void sonidoFondo() {
+        try {
+            sonidoFondo = AudioSystem.getClip();
+            sonidoFondo.open(AudioSystem.getAudioInputStream(getClass().getResource("/sonidos/467497__enviromaniac2__pokemon-route-201-cheesy-mix.wav")));
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
     }
 
     /**
